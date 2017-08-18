@@ -48,23 +48,23 @@ class FeatureContext extends BehatContext
      */
     public function iAddADollarItemNamed($dollars, $product_name)
     {
-        throw new PendingException();
+        $this->cart->addItem($product_name, $dollars);
     }
-    
+
     /**
      * @When /^I add a "([^"]*)" dollar "([^"]*)" lb item named "([^"]*)"$/
      */
     public function iAddADollarItemWithWeight($dollars, $lb, $product_name)
     {
-        throw new PendingException();
+        $this->cart->addItem($product_name, $dollars, $lb);
     }
-    
+
     /**
      * @Then /^My total should be "([^"]*)" dollars$/
      */
     public function myTotalShouldBeDollars($total)
     {
-        throw new PendingException();
+        Assert::assertEquals($total, $this->cart->total());
     }
 
     /**
@@ -72,16 +72,17 @@ class FeatureContext extends BehatContext
      */
     public function myQuantityOfProductsShouldBe($product_name, $quantity)
     {
-        throw new PendingException();
+        Assert::assertEquals($quantity, $this->cart->getItemQuantity($product_name));
     }
-    
+
 
     /**
      * @Given /^I have a cart with a "([^"]*)" dollar item named "([^"]*)"$/
      */
     public function iHaveACartWithADollarItem($item_cost, $product_name)
     {
-        throw new PendingException();
+        $this->cart = new Cart();
+        $this->cart->addItem($product_name, $item_cost);
     }
 
     /**
@@ -89,7 +90,7 @@ class FeatureContext extends BehatContext
      */
     public function iApplyAPercentCouponCode($discount)
     {
-        throw new PendingException();
+        $this->cart->addCoupon($discount);
     }
 
     /**
